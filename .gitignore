@@ -20,6 +20,7 @@ credentials.json
 token.json
 gmail-sync-log.json
 sync-log.json
+docs/openbrain-credentials.txt
 
 # Build artifacts
 deno.lock
