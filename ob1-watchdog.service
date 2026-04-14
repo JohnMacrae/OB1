@@ -1,0 +1,26 @@
+[Unit]
+Description=OB1 Life Engine Watchdog
+Documentation=https://github.com/jramacrae/ob1
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=john
+WorkingDirectory=/volume1/docker/OB1
+ExecStart=/volume1/docker/OB1/ob1-restart.sh
+Restart=always
+RestartSec=30s
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+# Environment
+Environment="HOME=/home/john"
+Environment="PATH=/home/john/.bun/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Logging
+StandardOutput=append:/volume1/docker/OB1/watchdog.log
+StandardError=append:/volume1/docker/OB1/watchdog.log
+
+[Install]
+WantedBy=multi-user.target
