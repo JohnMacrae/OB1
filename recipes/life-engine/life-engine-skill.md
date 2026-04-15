@@ -273,6 +273,28 @@ After executing the current loop iteration:
 
 **Important:** When creating cron jobs, avoid the :00 and :30 minute marks. Offset by a few minutes (e.g., `*/15` starting at minute 7 → `7,22,37,52`).
 
+## Incoming Telegram Message Handling
+
+When a `<channel source="telegram">` event arrives, check the message text **before** doing anything else:
+
+### `note:` prefix (case-insensitive)
+
+If the message starts with `note:` (e.g. `note: remember to call Dave`):
+
+1. **Call `capture_thought` immediately** — this is the very first action, before any reply or reaction.
+   - `content`: the text after the `note:` prefix (trimmed)
+   - `source`: `"telegram"`
+2. **Reply** with: `✅ Noted.`
+3. Do NOT do anything else (no briefing logic, no rescheduling changes — just capture and confirm).
+
+**This rule is mandatory.** Do not skip `capture_thought` and do not reply before calling it.
+
+### Other Telegram replies
+
+For check-in responses, habit confirmations, and improvement approvals: `react` to acknowledge, log to the appropriate table, and `reply` immediately.
+
+---
+
 ## Rules
 
 1. **No duplicate briefings.** Always check the log first using `anchor_date`.
@@ -281,7 +303,7 @@ After executing the current loop iteration:
 4. **Log everything.** Every briefing sent gets a row in `life_engine_briefings`.
 5. **One suggestion per week.** Don't overwhelm with changes.
 6. **Respect quiet hours.** 7 PM to 6 AM (based on `anchor_time`) is off-limits unless a meeting is imminent.
-7. **Respond to channel replies.** When a `<channel>` event arrives from any platform (Telegram or Discord) — check-in response, habit confirmation, Daily Capture breadcrumb, improvement approval — `react` to acknowledge, log it to the appropriate table, `reply` immediately, and UPDATE the most recent matching briefing's `user_responded = true` so the self-improvement protocol can measure engagement.
+7. **Respond to channel replies.** When a `<channel>` event arrives from any platform (Telegram or Discord) — check-in response, habit confirmation, Daily Capture breadcrumb, improvement approval — `react` to acknowledge, log it to the appropriate table, `reply` immediately, and UPDATE the most recent matching briefing's `user_responded = true` so the self-improvement protocol can measure engagement. For Telegram messages with a `note:` prefix, see "Incoming Telegram Message Handling" — `capture_thought` is mandatory before any reply.
 8. **Always reschedule.** Every loop iteration must end with a reschedule. Never exit without setting the next cron job.
 9. **Degrade gracefully.** If an external integration fails (calendar, Open Brain), send the briefing with available data and note what's missing. Never silently skip a briefing due to a partial integration failure.
 10. **Accept habits via channel messages.** When the user sends a message like "add habit: meditate" or "new habit: read 30 min", insert a row into `life_engine_habits`. If the user specifies a time context (e.g., "evening habit: stretch", "morning habit: journal"), set `time_of_day` accordingly; otherwise let the database defaults apply (daily, morning). When they confirm completion (e.g., "done meditating", "finished reading"), log to `life_engine_habit_log` and `react` with 👍.
