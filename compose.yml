@@ -7,6 +7,7 @@ services:
     ports:
       - "8100:8000"
     environment:
+      - TZ=Europe/London
       - SUPABASE_URL=${SUPABASE_URL}
       - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
