@@ -28,3 +28,13 @@ docs/walkthroughs/*/public/
 docs/assets/agent-memory/promotional/generated-backgrounds/**/result.json
 docs/assets/agent-memory/screenshots/**/.chrome-*/
 integrations/openclaw-agent-memory/dist/
+
+# Local working notes (rendered HTML pairs included)
+/BACKLOG.md
+/BACKLOG.html
+/STATUS.md
+/STATUS.html
+/PROJECT.md
+/PROJECT.html
+/HANDOVER_property-manager-refactor.md
+/HANDOVER_property-manager-refactor.html
