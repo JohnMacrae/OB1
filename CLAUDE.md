@@ -98,3 +98,9 @@ This repo also has a maintainer-local GSD layer in `.planning/`.
 - Start with `.planning/STATE.md`, then read `.planning/PROJECT.md`, `.planning/ROADMAP.md`, and the relevant `.planning/codebase/*.md` documents.
 - Keep `.planning/` local. It is gitignored intentionally and is not part of the public contribution contract or upstream PR scope.
 - Public contributor rules still come from `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, and the committed repo files.
+
+## Gmail Hard Rules
+- NEVER call gmail_read_message or gmail_read_thread — these mark emails as read
+- gmail_search_messages is also suspect — avoid all Gmail MCP tools
+- Unread status is John's personal attention signal and must never be touched
+- If you need email info, ask John directly
