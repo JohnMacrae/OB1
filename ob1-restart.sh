@@ -29,7 +29,9 @@ if tmux -S /tmp/ob1.sock has-session -t "$SESSION_NAME" 2>/dev/null; then
     PANE_PID=$(tmux -S /tmp/ob1.sock list-panes -t "$SESSION_NAME" -F '#{pane_pid}' 2>/dev/null | head -1)
     if [ -n "$PANE_PID" ] && kill -0 "$PANE_PID" 2>/dev/null; then
         log "Existing session is healthy (pane PID $PANE_PID) — waiting for it to exit"
-        wait "$PANE_PID" 2>/dev/null || true
+        while kill -0 "$PANE_PID" 2>/dev/null; do
+            sleep 5
+        done
         log "OB1 tmux session ended — systemd will restart"
         exit 0
     else
@@ -55,5 +57,7 @@ else
 fi
 
 PANE_PID=$(tmux -S /tmp/ob1.sock list-panes -t "$SESSION_NAME" -F '#{pane_pid}' 2>/dev/null | head -1)
-wait "$PANE_PID" 2>/dev/null || true
+while [ -n "$PANE_PID" ] && kill -0 "$PANE_PID" 2>/dev/null; do
+    sleep 5
+done
 log "OB1 tmux session ended — systemd will restart"
