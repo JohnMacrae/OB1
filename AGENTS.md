@@ -1,5 +1,11 @@
 # OB1 Agent Instructions
 
+## Local session resume (this checkout)
+
+- **`next`** — read root `NEXT.md` first (gitignored roadmap). Summarize state, surface decisions, wait for John before a feature wave.
+- **`dccpr`** — Document → Commit → Check → Push → PR (see `.cursor/rules/dccpr.mdc`). Never commit `NEXT.md` / `STATUS.md` / other local notes.
+- Durable goal: `PROJECT.md`. Long-form record: `STATUS.md`. Idea queue: `BACKLOG.md`.
+
 ## Parallel Agent Worktrees
 
 When multiple AI agents or assistant chats work on this repo, do not put them in the same checkout.

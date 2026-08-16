@@ -1,0 +1,24 @@
+---
+description: dccpr means Document, Commit, Check, Push, PR
+alwaysApply: true
+---
+
+# dccpr
+
+When the user says **`dccpr`**, do all five steps. When they say **`dcp`**, stop after Push (no PR).
+
+1. **Document** — refresh `NEXT.md` with current state, decisions made, blockers,
+   and next steps. Update `STATUS.md` only if the long-form record changed.
+   Do **not** commit `NEXT.md` / `STATUS.md` / other gitignored local notes.
+2. **Commit** — stage only task files; create small logical commit(s) per repo
+   commit protocol. Never secrets, never force-push, never amend unless John asks.
+3. **Check** — run the smoke that matches the change (at minimum: `git status`,
+   and for runtime work: watchdog/socket/`sbbrain`). Fix must-fix failures
+   before claiming done.
+4. **Push** — `git push` to the tracked remote branch.
+5. **PR** — open a PR if none exists for this unit, or update the existing one.
+   Title with `[category]` per CONTRIBUTING. Note Bugbot/CI; do not treat green
+   CI alone as “reviewed.”
+
+Do not skip steps unless the user explicitly narrows the request
+(e.g. “just document”, “commit only”).

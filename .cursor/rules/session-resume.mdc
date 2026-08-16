@@ -1,0 +1,22 @@
+---
+description: Load NEXT.md when John says next (or resumes) — roadmap + decisions
+alwaysApply: true
+---
+
+# SESSION RESUME — read NEXT.md first
+
+`NEXT.md` (repo root) is the working roadmap / decision pad for this OB1 Life Engine
+checkout. It is **gitignored** (local only — never commit it).
+
+When the user says **`next`**, **`dccpr`**, or resumes mid-stream:
+
+1. Read `NEXT.md` before acting.
+2. Summarize current state in a few lines.
+3. Surface open **Decisions needed** and wait for John to pick — do not start a
+   feature wave until a priority/branch decision is clear.
+4. Refresh live facts (branch, `git status`, watchdog/socket, open PR) if the
+   file looks stale, then update `NEXT.md`.
+
+If `NEXT.md` is missing, rebuild it from `PROJECT.md`, `STATUS.md`, `BACKLOG.md`,
+`git status` / `git log origin/main..HEAD`, and runtime checks (`ob1-watchdog`,
+`/tmp/ob1.sock`, `sbbrain`).
