@@ -23,12 +23,13 @@ Never built an Open Brain? Start here:
 
 ## Recent Contributions
 
-The 20 most recent merged PRs. This list is generated from GitHub and refreshes daily. Last updated: 2026-08-16.
+The 20 most recent merged PRs. This list is generated from GitHub and refreshes daily. Last updated: 2026-09-06.
 
 <!-- recent-contributions:start -->
 
 | Contribution | What changed | Creator |
 | ------------ | ------------ | ------- |
+| [Refresh README recent contributions](README.md) | Refresh README recent contributions. | [@github-actions[bot]](https://github.com/github-actions[bot]) |
 
 <!-- recent-contributions:end -->
 
